@@ -1,11 +1,15 @@
 <template>
-  <button class="btn btn-primary">
+  <button 
+    class="btn btn-primary" 
+    @click="$emit('on:click')"
+  >
       
       <!-- you can add two classes as attributes but -->
       <!-- <i 
         class="fa fa-2x"
         :class="icon">
     </i> -->
+   
     <i :class="`fa fa-2x ${icon}`">
 
     </i>

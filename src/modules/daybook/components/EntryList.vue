@@ -4,23 +4,53 @@
          <input
             type="text"
             class="form-control"
-            placeholder="Search Entry">
+            placeholder="Search Entry"
+            v-model="term">
+      </div>
+
+      <div class="mt-2 d-flex flex-column">
+          <button class="btn btn-primary mx-3"
+            @click="$router.push({name:'entry', params:{id:'new'}})"
+          >
+            <i class="fa fa-plus-circle"></i>
+            New Entry
+          </button>
       </div>
       <div class="entry-scrollarea">
-          <h2
-            v-for="item in 100"
-            :key='item'>
-                <Entry />
-            </h2>
+          
+        <Entry 
+            v-for="entry in entriesByTerm"
+            :key='entry.id'
+            :entry="entry"
+        />
+           
       </div>
   </div>
 </template>
 
 <script>
 import { defineAsyncComponent } from '@vue/runtime-core'
+import {mapGetters} from 'vuex'
+
+// This is other way to call the getter
+//  v-for="item in $store.getters['journal/getEntriesByTerm']"
+
 export default {
     components:{
         Entry: defineAsyncComponent (() => import('./Entry.vue'))
+    }, 
+    
+    computed: {
+        ...mapGetters('journal', ['getEntriesByTerm']),
+        entriesByTerm(){
+            return this.getEntriesByTerm(this.term)
+        }
+    },
+
+    data(){
+        return{
+            term: ''
+        }
     }
 }
 </script>
