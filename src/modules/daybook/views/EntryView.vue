@@ -70,6 +70,7 @@ import uploadImage from '../helpers/uploadImage'
 import Swal from 'sweetalert2'
 
 export default {
+    name:'EntryView',
     props:{
         id:{
             type: String,
@@ -163,7 +164,7 @@ export default {
             })
 
             if (isConfirmed){
-                new Swal({
+                 Swal.fire({
                     title:'Wait',
                     allowOutsideClick:false
                 })
